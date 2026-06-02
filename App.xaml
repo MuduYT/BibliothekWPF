@@ -1,0 +1,35 @@
+<Application x:Class="Bibliothek.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="clr-namespace:Bibliothek.Views"
+             xmlns:viewModels="clr-namespace:Bibliothek.ViewModels">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/AppTheme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModels:DashboardViewModel}">
+                <views:DashboardView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:BooksViewModel}">
+                <views:BooksView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:AuthorsViewModel}">
+                <views:AuthorsView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:PublishersViewModel}">
+                <views:PublishersView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:PlacesViewModel}">
+                <views:PlacesView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:StatisticsViewModel}">
+                <views:StatisticsView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:SettingsViewModel}">
+                <views:SettingsView />
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
