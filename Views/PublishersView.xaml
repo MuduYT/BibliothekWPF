@@ -28,7 +28,7 @@
                   GridLinesVisibility="Horizontal"
                   HorizontalGridLinesBrush="#444444"
                   VerticalGridLinesBrush="#444444"
-                  ColumnHeaderStyle="{StaticResource DarkDataGridColumnHeaderStyle}">
+                  Loaded="DataGrid_Loaded">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
                 <DataGridTextColumn Header="Ort" Binding="{Binding Firmensitz.Name}" Width="160" />

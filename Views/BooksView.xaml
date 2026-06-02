@@ -32,7 +32,7 @@
                   GridLinesVisibility="Horizontal"
                   HorizontalGridLinesBrush="#444444"
                   VerticalGridLinesBrush="#444444"
-                  ColumnHeaderStyle="{StaticResource DarkDataGridColumnHeaderStyle}">
+                  Loaded="DataGrid_Loaded">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Titel" Binding="{Binding Titel}" Width="*" />
                 <DataGridTextColumn Header="Autor" Binding="{Binding Autor.Name}" Width="180" />
