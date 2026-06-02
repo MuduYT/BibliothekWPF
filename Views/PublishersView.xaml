@@ -19,7 +19,15 @@
             </StackPanel>
         </DockPanel>
         <TextBox Grid.Row="1" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,14" />
-        <DataGrid Grid.Row="2" ItemsSource="{Binding ItemsView}" SelectedItem="{Binding SelectedItem}">
+        <DataGrid Grid.Row="2" ItemsSource="{Binding ItemsView}" SelectedItem="{Binding SelectedItem}"
+                  Background="#2D2D2D"
+                  Foreground="#F0F0F0"
+                  RowBackground="#2D2D2D"
+                  AlternatingRowBackground="#333333"
+                  BorderBrush="#444444"
+                  GridLinesVisibility="Horizontal"
+                  HorizontalGridLinesBrush="#444444"
+                  VerticalGridLinesBrush="#444444">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
                 <DataGridTextColumn Header="Ort" Binding="{Binding Firmensitz.Name}" Width="160" />
