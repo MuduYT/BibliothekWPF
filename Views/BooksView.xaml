@@ -31,8 +31,7 @@
                   BorderBrush="#444444"
                   GridLinesVisibility="Horizontal"
                   HorizontalGridLinesBrush="#444444"
-                  VerticalGridLinesBrush="#444444"
-                  Loaded="DataGrid_Loaded">
+                  VerticalGridLinesBrush="#444444">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Titel" Binding="{Binding Titel}" Width="*" />
                 <DataGridTextColumn Header="Autor" Binding="{Binding Autor.Name}" Width="180" />

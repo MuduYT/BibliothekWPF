@@ -27,8 +27,7 @@
                   BorderBrush="#444444"
                   GridLinesVisibility="Horizontal"
                   HorizontalGridLinesBrush="#444444"
-                  VerticalGridLinesBrush="#444444"
-                  Loaded="DataGrid_Loaded">
+                  VerticalGridLinesBrush="#444444">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
                 <DataGridTextColumn Header="Jahrgang" Binding="{Binding Jahrgang}" Width="140" />
