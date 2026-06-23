@@ -103,9 +103,9 @@
                            Foreground="White"
                            HorizontalAlignment="Center"
                            Margin="0,0,0,16" />
-                <Image Source="/Logo.png"
+                <Image Source="pack://application:,,,/Logo.png"
                        Stretch="Uniform"
-                       MaxHeight="150"
+                       MaxHeight="280"
                        HorizontalAlignment="Center" />
             </StackPanel>
 
@@ -131,11 +131,11 @@
                         <!-- Placeholder Image -->
                         <Image Source="/Resources/Images/card_orte.png"
                                Stretch="UniformToFill"
-                               Height="80"
+                               Height="50"
                                VerticalAlignment="Top"/>
 
                         <!-- Gradient fade overlay from image to card background -->
-                        <Border Height="80" VerticalAlignment="Top">
+                        <Border Height="50" VerticalAlignment="Top">
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                                     <GradientStop Color="Transparent" Offset="0.4"/>
@@ -145,17 +145,17 @@
                         </Border>
 
                         <!-- Circular Overlay Icon Badge -->
-                        <Border Width="32" Height="32"
-                                CornerRadius="16"
+                        <Border Width="24" Height="24"
+                                CornerRadius="12"
                                 Background="#E5111A24"
                                 BorderBrush="#4B7EB0"
                                 BorderThickness="1.5"
                                 VerticalAlignment="Top"
-                                Margin="12,68,0,0"
+                                Margin="8,42,0,0"
                                 HorizontalAlignment="Left">
                             <Path Data="{StaticResource IconLocation}"
                                   Fill="#90B2D4"
-                                  Width="12" Height="12"
+                                  Width="10" Height="10"
                                   Stretch="Uniform"
                                   HorizontalAlignment="Center"
                                   VerticalAlignment="Center"/>
@@ -164,10 +164,10 @@
                         <!-- Name -->
                         <TextBlock Text="Orte"
                                    FontFamily="Georgia, serif"
-                                   FontSize="14"
+                                   FontSize="11"
                                    Foreground="White"
                                    VerticalAlignment="Top"
-                                   Margin="12,108,12,0"/>
+                                   Margin="8,78,8,0"/>
                     </Grid>
                 </Button>
 
@@ -184,11 +184,11 @@
                         <!-- Placeholder Image -->
                         <Image Source="/Resources/Images/card_verlage.png"
                                Stretch="UniformToFill"
-                               Height="80"
+                               Height="50"
                                VerticalAlignment="Top"/>
 
                         <!-- Gradient fade overlay -->
-                        <Border Height="80" VerticalAlignment="Top">
+                        <Border Height="50" VerticalAlignment="Top">
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                                     <GradientStop Color="Transparent" Offset="0.4"/>
@@ -198,17 +198,17 @@
                         </Border>
 
                         <!-- Circular Overlay Icon Badge -->
-                        <Border Width="32" Height="32"
-                                CornerRadius="16"
+                        <Border Width="24" Height="24"
+                                CornerRadius="12"
                                 Background="#E5111A24"
                                 BorderBrush="#3271A5"
                                 BorderThickness="1.5"
                                 VerticalAlignment="Top"
-                                Margin="12,68,0,0"
+                                Margin="8,42,0,0"
                                 HorizontalAlignment="Left">
                             <Path Data="{StaticResource IconPublisher}"
                                   Fill="#78A5C8"
-                                  Width="12" Height="12"
+                                  Width="10" Height="10"
                                   Stretch="Uniform"
                                   HorizontalAlignment="Center"
                                   VerticalAlignment="Center"/>
@@ -217,10 +217,10 @@
                         <!-- Name -->
                         <TextBlock Text="Verlage"
                                    FontFamily="Georgia, serif"
-                                   FontSize="14"
+                                   FontSize="11"
                                    Foreground="White"
                                    VerticalAlignment="Top"
-                                   Margin="12,108,12,0"/>
+                                   Margin="8,78,8,0"/>
                     </Grid>
                 </Button>
 
@@ -237,11 +237,11 @@
                         <!-- Placeholder Image -->
                         <Image Source="/Resources/Images/card_authors.png"
                                Stretch="UniformToFill"
-                               Height="80"
+                               Height="50"
                                VerticalAlignment="Top"/>
 
                         <!-- Gradient fade overlay -->
-                        <Border Height="80" VerticalAlignment="Top">
+                        <Border Height="50" VerticalAlignment="Top">
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                                     <GradientStop Color="Transparent" Offset="0.4"/>
@@ -251,17 +251,17 @@
                         </Border>
 
                         <!-- Circular Overlay Icon Badge -->
-                        <Border Width="32" Height="32"
-                                CornerRadius="16"
+                        <Border Width="24" Height="24"
+                                CornerRadius="12"
                                 Background="#E5111A24"
                                 BorderBrush="#7A4C9F"
                                 BorderThickness="1.5"
                                 VerticalAlignment="Top"
-                                Margin="12,68,0,0"
+                                Margin="8,42,0,0"
                                 HorizontalAlignment="Left">
                             <Path Data="{StaticResource IconAuthor}"
                                   Fill="#A687BF"
-                                  Width="12" Height="12"
+                                  Width="10" Height="10"
                                   Stretch="Uniform"
                                   HorizontalAlignment="Center"
                                   VerticalAlignment="Center"/>
@@ -270,10 +270,10 @@
                         <!-- Name -->
                         <TextBlock Text="Authors"
                                    FontFamily="Georgia, serif"
-                                   FontSize="14"
+                                   FontSize="11"
                                    Foreground="White"
                                    VerticalAlignment="Top"
-                                   Margin="12,108,12,0"/>
+                                   Margin="8,78,8,0"/>
                     </Grid>
                 </Button>
 
@@ -290,11 +290,11 @@
                         <!-- Placeholder Image -->
                         <Image Source="/Resources/Images/card_books.png"
                                Stretch="UniformToFill"
-                               Height="80"
+                               Height="50"
                                VerticalAlignment="Top"/>
 
                         <!-- Gradient fade overlay -->
-                        <Border Height="80" VerticalAlignment="Top">
+                        <Border Height="50" VerticalAlignment="Top">
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                                     <GradientStop Color="Transparent" Offset="0.4"/>
@@ -304,17 +304,17 @@
                         </Border>
 
                         <!-- Circular Overlay Icon Badge -->
-                        <Border Width="32" Height="32"
-                                CornerRadius="16"
+                        <Border Width="24" Height="24"
+                                CornerRadius="12"
                                 Background="#E5111A24"
                                 BorderBrush="#9C7B4C"
                                 BorderThickness="1.5"
                                 VerticalAlignment="Top"
-                                Margin="12,68,0,0"
+                                Margin="8,42,0,0"
                                 HorizontalAlignment="Left">
                             <Path Data="{StaticResource IconBook}"
                                   Fill="#C8A574"
-                                  Width="12" Height="12"
+                                  Width="10" Height="10"
                                   Stretch="Uniform"
                                   HorizontalAlignment="Center"
                                   VerticalAlignment="Center"/>
@@ -323,10 +323,10 @@
                         <!-- Name -->
                         <TextBlock Text="Books"
                                    FontFamily="Georgia, serif"
-                                   FontSize="14"
+                                   FontSize="11"
                                    Foreground="White"
                                    VerticalAlignment="Top"
-                                   Margin="12,108,12,0"/>
+                                   Margin="8,78,8,0"/>
                     </Grid>
                 </Button>
             </Grid>
