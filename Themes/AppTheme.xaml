@@ -110,16 +110,12 @@
         <Setter Property="AlternatingRowBackground" Value="{StaticResource BrushPanelAlt}" />
         <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource BrushBorder}" />
         <Setter Property="VerticalGridLinesBrush" Value="{StaticResource BrushBorder}" />
-        <Setter Property="SelectionBrush" Value="{StaticResource BrushAccent}" />
-        <Setter Property="SelectionBackground" Value="{StaticResource BrushAccent}" />
     </Style>
 
     <Style TargetType="DataGridRow">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="BorderBrush" Value="{StaticResource BrushBorder}" />
-        <Setter Property="SelectionBackground" Value="{StaticResource BrushAccent}" />
-        <Setter Property="SelectionForeground" Value="White" />
     </Style>
 
     <Style TargetType="DataGridCell">
