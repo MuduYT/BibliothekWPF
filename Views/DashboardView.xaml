@@ -2,47 +2,51 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Resources>
-        <!-- Smooth, fully clickable dashboard card -->
         <Style x:Key="DashboardCardButton" TargetType="Button">
-            <Setter Property="Background" Value="#111A24" />
-            <Setter Property="BorderBrush" Value="#1A2835" />
+            <Setter Property="Background" Value="{StaticResource BrushPanel}" />
+            <Setter Property="BorderBrush" Value="{StaticResource BrushBorder}" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Padding" Value="0" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="CardBorder"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="8"
-                                ClipToBounds="True"
-                                RenderTransformOrigin="0.5,0.5">
-                            <Border.RenderTransform>
+                        <Grid x:Name="Root" RenderTransformOrigin="0.5,0.5">
+                            <Grid.RenderTransform>
                                 <ScaleTransform x:Name="CardScale" ScaleX="1" ScaleY="1" />
-                            </Border.RenderTransform>
-                            <ContentPresenter />
-                        </Border>
+                            </Grid.RenderTransform>
+                            <Border x:Name="CardBorder"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="20"
+                                    SnapsToDevicePixels="True" />
+                            <Border x:Name="CardOutline"
+                                    CornerRadius="20"
+                                    Background="Transparent"
+                                    BorderBrush="#2B3A49"
+                                    BorderThickness="1" />
+                            <Border x:Name="HoverOverlay"
+                                    CornerRadius="20"
+                                    Background="#FFFFFF"
+                                    Opacity="0" />
+                            <ContentPresenter Margin="0"
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Stretch" />
+                        </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="CardBorder" Property="BorderBrush" Value="#33546F" />
+                                <Setter TargetName="HoverOverlay" Property="Opacity" Value="0.045" />
+                                <Setter TargetName="CardOutline" Property="BorderBrush" Value="#3B5368" />
                                 <Trigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <DoubleAnimation Storyboard.TargetName="CardScale"
                                                              Storyboard.TargetProperty="ScaleX"
-                                                             To="1.03" Duration="0:0:0.15">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <CubicEase EasingMode="EaseOut" />
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
+                                                             To="1.015" Duration="0:0:0.12" />
                                             <DoubleAnimation Storyboard.TargetName="CardScale"
                                                              Storyboard.TargetProperty="ScaleY"
-                                                             To="1.03" Duration="0:0:0.15">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <CubicEase EasingMode="EaseOut" />
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
+                                                             To="1.015" Duration="0:0:0.12" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.EnterActions>
@@ -51,21 +55,16 @@
                                         <Storyboard>
                                             <DoubleAnimation Storyboard.TargetName="CardScale"
                                                              Storyboard.TargetProperty="ScaleX"
-                                                             To="1" Duration="0:0:0.15">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <CubicEase EasingMode="EaseOut" />
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
+                                                             To="1" Duration="0:0:0.12" />
                                             <DoubleAnimation Storyboard.TargetName="CardScale"
                                                              Storyboard.TargetProperty="ScaleY"
-                                                             To="1" Duration="0:0:0.15">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <CubicEase EasingMode="EaseOut" />
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
+                                                             To="1" Duration="0:0:0.12" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="HoverOverlay" Property="Opacity" Value="0.08" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -97,9 +96,9 @@
             <!-- Logo Section -->
             <StackPanel Grid.Row="0" Margin="0,32,0,48" HorizontalAlignment="Center">
                 <TextBlock Text="Willkommen zu"
-                           FontFamily="Georgia, serif"
+                           FontFamily="Aptos, Segoe UI Variable Text, Segoe UI, Arial"
                            FontSize="28"
-                           FontWeight="Normal"
+                           FontWeight="SemiBold"
                            Foreground="White"
                            HorizontalAlignment="Center"
                            Margin="0,0,0,16" />
@@ -125,49 +124,59 @@
                         Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                         CommandParameter="{Binding DataContext.MainNavigationItems[1], RelativeSource={RelativeSource AncestorType=Window}}">
                     <Grid>
-                        <!-- Top highlighted indicator line -->
-                        <Border Height="3" Background="#4B7EB0" VerticalAlignment="Top" CornerRadius="8,8,0,0"/>
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#182533" Offset="0" />
+                                <GradientStop Color="#111A24" Offset="1" />
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                        <Border Height="146"
+                                VerticalAlignment="Top"
+                                CornerRadius="18,18,0,0">
+                        </Border>
 
-                        <!-- Placeholder Image -->
                         <Image Source="/Resources/Images/card_orte.png"
                                Stretch="UniformToFill"
-                               Height="50"
-                               VerticalAlignment="Top"/>
+                               Height="78"
+                               VerticalAlignment="Top"
+                               Opacity="0.78" />
 
-                        <!-- Gradient fade overlay from image to card background -->
-                        <Border Height="50" VerticalAlignment="Top">
+                        <Border Height="78" VerticalAlignment="Top">
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                    <GradientStop Color="Transparent" Offset="0.4"/>
+                                    <GradientStop Color="Transparent" Offset="0.25"/>
                                     <GradientStop Color="#111A24" Offset="1.0"/>
                                 </LinearGradientBrush>
                             </Border.Background>
                         </Border>
 
-                        <!-- Circular Overlay Icon Badge -->
-                        <Border Width="24" Height="24"
-                                CornerRadius="12"
-                                Background="#E5111A24"
+                        <Border Width="34" Height="34"
+                                CornerRadius="17"
+                                Background="#14283A"
                                 BorderBrush="#4B7EB0"
                                 BorderThickness="1.5"
                                 VerticalAlignment="Top"
-                                Margin="8,42,0,0"
+                                Margin="18,52,0,0"
                                 HorizontalAlignment="Left">
                             <Path Data="{StaticResource IconLocation}"
                                   Fill="#90B2D4"
-                                  Width="10" Height="10"
+                                  Width="14" Height="14"
                                   Stretch="Uniform"
                                   HorizontalAlignment="Center"
                                   VerticalAlignment="Center"/>
                         </Border>
 
-                        <!-- Name -->
-                        <TextBlock Text="Orte"
-                                   FontFamily="Georgia, serif"
-                                   FontSize="11"
-                                   Foreground="White"
-                                   VerticalAlignment="Top"
-                                   Margin="8,78,8,0"/>
+                        <StackPanel Margin="18,90,18,18" VerticalAlignment="Bottom">
+                            <TextBlock Text="Orte"
+                                       Style="{StaticResource DashboardCardTitle}"
+                                       FontSize="17"
+                                       Margin="0,0,0,4" />
+                            <TextBlock Text="Orte verwalten, bearbeiten und strukturieren."
+                                       Foreground="{StaticResource BrushMuted}"
+                                       TextWrapping="Wrap"
+                                       FontSize="11"
+                                       LineHeight="14" />
+                        </StackPanel>
                     </Grid>
                 </Button>
 
@@ -178,49 +187,59 @@
                         Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                         CommandParameter="{Binding DataContext.MainNavigationItems[2], RelativeSource={RelativeSource AncestorType=Window}}">
                     <Grid>
-                        <!-- Top highlighted indicator line -->
-                        <Border Height="3" Background="#3271A5" VerticalAlignment="Top" CornerRadius="8,8,0,0"/>
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#1A2735" Offset="0" />
+                                <GradientStop Color="#111A24" Offset="1" />
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                        <Border Height="146"
+                                VerticalAlignment="Top"
+                                CornerRadius="18,18,0,0">
+                        </Border>
 
-                        <!-- Placeholder Image -->
                         <Image Source="/Resources/Images/card_verlage.png"
                                Stretch="UniformToFill"
-                               Height="50"
-                               VerticalAlignment="Top"/>
+                               Height="78"
+                               VerticalAlignment="Top"
+                               Opacity="0.78" />
 
-                        <!-- Gradient fade overlay -->
-                        <Border Height="50" VerticalAlignment="Top">
+                        <Border Height="78" VerticalAlignment="Top">
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                    <GradientStop Color="Transparent" Offset="0.4"/>
+                                    <GradientStop Color="Transparent" Offset="0.25"/>
                                     <GradientStop Color="#111A24" Offset="1.0"/>
                                 </LinearGradientBrush>
                             </Border.Background>
                         </Border>
 
-                        <!-- Circular Overlay Icon Badge -->
-                        <Border Width="24" Height="24"
-                                CornerRadius="12"
-                                Background="#E5111A24"
+                        <Border Width="34" Height="34"
+                                CornerRadius="17"
+                                Background="#14283A"
                                 BorderBrush="#3271A5"
                                 BorderThickness="1.5"
                                 VerticalAlignment="Top"
-                                Margin="8,42,0,0"
+                                Margin="18,52,0,0"
                                 HorizontalAlignment="Left">
                             <Path Data="{StaticResource IconPublisher}"
                                   Fill="#78A5C8"
-                                  Width="10" Height="10"
+                                  Width="14" Height="14"
                                   Stretch="Uniform"
                                   HorizontalAlignment="Center"
                                   VerticalAlignment="Center"/>
                         </Border>
 
-                        <!-- Name -->
-                        <TextBlock Text="Verlage"
-                                   FontFamily="Georgia, serif"
-                                   FontSize="11"
-                                   Foreground="White"
-                                   VerticalAlignment="Top"
-                                   Margin="8,78,8,0"/>
+                        <StackPanel Margin="18,90,18,18" VerticalAlignment="Bottom">
+                            <TextBlock Text="Verlage"
+                                       Style="{StaticResource DashboardCardTitle}"
+                                       FontSize="17"
+                                       Margin="0,0,0,4" />
+                            <TextBlock Text="Verlage verwalten, Kontakte pflegen und Firmensitze zuordnen."
+                                       Foreground="{StaticResource BrushMuted}"
+                                       TextWrapping="Wrap"
+                                       FontSize="11"
+                                       LineHeight="14" />
+                        </StackPanel>
                     </Grid>
                 </Button>
 
@@ -231,49 +250,59 @@
                         Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                         CommandParameter="{Binding DataContext.MainNavigationItems[3], RelativeSource={RelativeSource AncestorType=Window}}">
                     <Grid>
-                        <!-- Top highlighted indicator line -->
-                        <Border Height="3" Background="#7A4C9F" VerticalAlignment="Top" CornerRadius="8,8,0,0"/>
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#241B33" Offset="0" />
+                                <GradientStop Color="#111A24" Offset="1" />
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                        <Border Height="146"
+                                VerticalAlignment="Top"
+                                CornerRadius="18,18,0,0">
+                        </Border>
 
-                        <!-- Placeholder Image -->
                         <Image Source="/Resources/Images/card_authors.png"
                                Stretch="UniformToFill"
-                               Height="50"
-                               VerticalAlignment="Top"/>
+                               Height="78"
+                               VerticalAlignment="Top"
+                               Opacity="0.78" />
 
-                        <!-- Gradient fade overlay -->
-                        <Border Height="50" VerticalAlignment="Top">
+                        <Border Height="78" VerticalAlignment="Top">
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                    <GradientStop Color="Transparent" Offset="0.4"/>
+                                    <GradientStop Color="Transparent" Offset="0.25"/>
                                     <GradientStop Color="#111A24" Offset="1.0"/>
                                 </LinearGradientBrush>
                             </Border.Background>
                         </Border>
 
-                        <!-- Circular Overlay Icon Badge -->
-                        <Border Width="24" Height="24"
-                                CornerRadius="12"
-                                Background="#E5111A24"
+                        <Border Width="34" Height="34"
+                                CornerRadius="17"
+                                Background="#211528"
                                 BorderBrush="#7A4C9F"
                                 BorderThickness="1.5"
                                 VerticalAlignment="Top"
-                                Margin="8,42,0,0"
+                                Margin="18,52,0,0"
                                 HorizontalAlignment="Left">
                             <Path Data="{StaticResource IconAuthor}"
                                   Fill="#A687BF"
-                                  Width="10" Height="10"
+                                  Width="14" Height="14"
                                   Stretch="Uniform"
                                   HorizontalAlignment="Center"
                                   VerticalAlignment="Center"/>
                         </Border>
 
-                        <!-- Name -->
-                        <TextBlock Text="Authors"
-                                   FontFamily="Georgia, serif"
-                                   FontSize="11"
-                                   Foreground="White"
-                                   VerticalAlignment="Top"
-                                   Margin="8,78,8,0"/>
+                        <StackPanel Margin="18,90,18,18" VerticalAlignment="Bottom">
+                            <TextBlock Text="Authors"
+                                       Style="{StaticResource DashboardCardTitle}"
+                                       FontSize="17"
+                                       Margin="0,0,0,4" />
+                            <TextBlock Text="Autorinnen und Autoren verwalten."
+                                       Foreground="{StaticResource BrushMuted}"
+                                       TextWrapping="Wrap"
+                                       FontSize="11"
+                                       LineHeight="14" />
+                        </StackPanel>
                     </Grid>
                 </Button>
 
@@ -284,49 +313,59 @@
                         Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                         CommandParameter="{Binding DataContext.MainNavigationItems[4], RelativeSource={RelativeSource AncestorType=Window}}">
                     <Grid>
-                        <!-- Top highlighted indicator line -->
-                        <Border Height="3" Background="#9C7B4C" VerticalAlignment="Top" CornerRadius="8,8,0,0"/>
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#30241A" Offset="0" />
+                                <GradientStop Color="#111A24" Offset="1" />
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                        <Border Height="146"
+                                VerticalAlignment="Top"
+                                CornerRadius="18,18,0,0">
+                        </Border>
 
-                        <!-- Placeholder Image -->
                         <Image Source="/Resources/Images/card_books.png"
                                Stretch="UniformToFill"
-                               Height="50"
-                               VerticalAlignment="Top"/>
+                               Height="78"
+                               VerticalAlignment="Top"
+                               Opacity="0.78" />
 
-                        <!-- Gradient fade overlay -->
-                        <Border Height="50" VerticalAlignment="Top">
+                        <Border Height="78" VerticalAlignment="Top">
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                    <GradientStop Color="Transparent" Offset="0.4"/>
+                                    <GradientStop Color="Transparent" Offset="0.25"/>
                                     <GradientStop Color="#111A24" Offset="1.0"/>
                                 </LinearGradientBrush>
                             </Border.Background>
                         </Border>
 
-                        <!-- Circular Overlay Icon Badge -->
-                        <Border Width="24" Height="24"
-                                CornerRadius="12"
-                                Background="#E5111A24"
+                        <Border Width="34" Height="34"
+                                CornerRadius="17"
+                                Background="#2A2017"
                                 BorderBrush="#9C7B4C"
                                 BorderThickness="1.5"
                                 VerticalAlignment="Top"
-                                Margin="8,42,0,0"
+                                Margin="18,52,0,0"
                                 HorizontalAlignment="Left">
                             <Path Data="{StaticResource IconBook}"
                                   Fill="#C8A574"
-                                  Width="10" Height="10"
+                                  Width="14" Height="14"
                                   Stretch="Uniform"
                                   HorizontalAlignment="Center"
                                   VerticalAlignment="Center"/>
                         </Border>
 
-                        <!-- Name -->
-                        <TextBlock Text="Books"
-                                   FontFamily="Georgia, serif"
-                                   FontSize="11"
-                                   Foreground="White"
-                                   VerticalAlignment="Top"
-                                   Margin="8,78,8,0"/>
+                        <StackPanel Margin="18,90,18,18" VerticalAlignment="Bottom">
+                            <TextBlock Text="Books"
+                                       Style="{StaticResource DashboardCardTitle}"
+                                       FontSize="17"
+                                       Margin="0,0,0,4" />
+                            <TextBlock Text="Bücher erfassen, zuordnen und verwalten."
+                                       Foreground="{StaticResource BrushMuted}"
+                                       TextWrapping="Wrap"
+                                       FontSize="11"
+                                       LineHeight="14" />
+                        </StackPanel>
                     </Grid>
                 </Button>
             </Grid>
