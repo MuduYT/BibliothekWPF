@@ -26,4 +26,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Resource Include="Logo.png" />
+  </ItemGroup>
+
 </Project>
