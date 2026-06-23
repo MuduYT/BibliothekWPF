@@ -24,6 +24,7 @@ public sealed partial class MainViewModel : ViewModelBase
 
         NavigationItems = [startseite, orte, verlage, authorsItem, booksItem, settingsItem];
         MainNavigationItems = [startseite, orte, verlage, authorsItem, booksItem];
+        TableNavigationItems = [orte, verlage, authorsItem, booksItem];
         SettingsNavigationItem = settingsItem;
 
         SelectNavigationItem(startseite);
@@ -31,6 +32,7 @@ public sealed partial class MainViewModel : ViewModelBase
 
     public ObservableCollection<NavigationItemViewModel> NavigationItems { get; }
     public ObservableCollection<NavigationItemViewModel> MainNavigationItems { get; }
+    public ObservableCollection<NavigationItemViewModel> TableNavigationItems { get; }
     public NavigationItemViewModel SettingsNavigationItem { get; }
 
     [ObservableProperty]
