@@ -4,9 +4,7 @@
     <StackPanel>
         <TextBlock Text="Statistiken" FontSize="24" FontWeight="SemiBold" />
         <TextBlock Text="{Binding Summary}" Margin="0,10,0,20" Foreground="{StaticResource BrushMuted}" />
-        <ItemsControl ItemsSource="{Binding Highlights}"
-                      Background="#2D2D2D"
-                      Foreground="#FFFFFF">
+        <ItemsControl ItemsSource="{Binding Highlights}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Border Background="{StaticResource BrushPanelAlt}" Padding="16" Margin="0,0,0,10">

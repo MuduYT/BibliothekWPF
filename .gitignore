@@ -481,3 +481,12 @@ $RECYCLE.BIN/
 # Vim temporary swap files
 *.swp
 .aider*
+
+# Published self-contained output
+publish-single/
+publish-standalone/
+
+# Local build logs
+build_log.txt
+build_output.txt
+build_results.txt

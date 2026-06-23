@@ -18,6 +18,119 @@
                       GlassFrameThickness="0" />
     </WindowChrome.WindowChrome>
 
+    <Window.Resources>
+        <!-- Left navigation rail icon button with hover scale + active state -->
+        <Style x:Key="NavRailButton" TargetType="Button">
+            <Setter Property="Width" Value="64" />
+            <Setter Property="Height" Value="56" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="Transparent">
+                            <Border x:Name="Indicator"
+                                    Width="3" Height="24"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    CornerRadius="0,2,2,0"
+                                    Background="{StaticResource BrushPrimary}"
+                                    Opacity="0" />
+                            <Border x:Name="Pill"
+                                    Width="44" Height="44"
+                                    CornerRadius="12"
+                                    Background="Transparent"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    RenderTransformOrigin="0.5,0.5">
+                                <Border.RenderTransform>
+                                    <ScaleTransform x:Name="PillScale" ScaleX="1" ScaleY="1" />
+                                </Border.RenderTransform>
+                                <Path x:Name="Icon"
+                                      Width="24" Height="24"
+                                      Stretch="Uniform"
+                                      Fill="#8A9EAD"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center" />
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Icon}" Value="Places">
+                                <Setter TargetName="Icon" Property="Data" Value="{StaticResource IconLocation}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Icon}" Value="Publishers">
+                                <Setter TargetName="Icon" Property="Data" Value="{StaticResource IconPublisher}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Icon}" Value="Authors">
+                                <Setter TargetName="Icon" Property="Data" Value="{StaticResource IconAuthor}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Icon}" Value="Books">
+                                <Setter TargetName="Icon" Property="Data" Value="{StaticResource IconBook}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Icon}" Value="Settings">
+                                <Setter TargetName="Icon" Property="Data" Value="{StaticResource IconSettings}" />
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                <Setter TargetName="Pill" Property="Background" Value="{StaticResource BrushAccent}" />
+                                <Setter TargetName="Icon" Property="Fill" Value="White" />
+                                <Setter TargetName="Indicator" Property="Opacity" Value="1" />
+                            </DataTrigger>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Icon" Property="Fill" Value="White" />
+                                <Setter TargetName="Pill" Property="Background" Value="#0E1620" />
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="PillScale"
+                                                             Storyboard.TargetProperty="ScaleX"
+                                                             To="1.15" Duration="0:0:0.15">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut" />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                            <DoubleAnimation Storyboard.TargetName="PillScale"
+                                                             Storyboard.TargetProperty="ScaleY"
+                                                             To="1.15" Duration="0:0:0.15">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut" />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="PillScale"
+                                                             Storyboard.TargetProperty="ScaleX"
+                                                             To="1" Duration="0:0:0.15">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut" />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                            <DoubleAnimation Storyboard.TargetName="PillScale"
+                                                             Storyboard.TargetProperty="ScaleY"
+                                                             To="1" Duration="0:0:0.15">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut" />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <!-- Left Strip (Settings only) -->
@@ -26,52 +139,31 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Left Strip containing ONLY Settings Gear in the middle -->
-        <Border Grid.Column="0" Background="#070B0F">
-            <Grid>
-                <Button Command="{Binding NavigateCommand}"
-                        CommandParameter="{Binding SettingsNavigationItem}"
-                        Width="64" Height="64"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        WindowChrome.IsHitTestVisibleInChrome="True"
-                        ToolTip="Einstellungen">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border x:Name="PillBorder"
-                                    Background="Transparent"
-                                    CornerRadius="32">
-                                <Path x:Name="IconPath"
-                                      Width="28" Height="28"
-                                      Stretch="Uniform"
-                                      Fill="#8A9EAD"
-                                      Data="{StaticResource IconSettings}"
-                                      HorizontalAlignment="Center"
-                                      VerticalAlignment="Center"/>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <!-- Selection States -->
-                                <DataTrigger Binding="{Binding SettingsNavigationItem.IsSelected}" Value="True">
-                                    <Setter TargetName="PillBorder" Property="Background" Value="#16222F" />
-                                    <Setter TargetName="IconPath" Property="Fill" Value="White" />
-                                </DataTrigger>
+        <!-- Left navigation rail: 4 table icons (+ settings pinned at bottom) -->
+        <Border Grid.Column="0" Background="#070B0F" BorderBrush="{StaticResource BrushBorder}" BorderThickness="0,0,1,0">
+            <DockPanel LastChildFill="True">
+                <Button DockPanel.Dock="Bottom"
+                        Style="{StaticResource NavRailButton}"
+                        Margin="0,0,0,12"
+                        DataContext="{Binding SettingsNavigationItem}"
+                        ToolTip="{Binding Title}"
+                        Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                        CommandParameter="{Binding}" />
 
-                                <!-- Hover States -->
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsMouseOver}" Value="True" />
-                                        <Condition Binding="{Binding SettingsNavigationItem.IsSelected}" Value="False" />
-                                    </MultiDataTrigger.Conditions>
-                                    <Setter TargetName="PillBorder" Property="Background" Value="#0E1620" />
-                                    <Setter TargetName="IconPath" Property="Fill" Value="White" />
-                                </MultiDataTrigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-            </Grid>
+                <ItemsControl ItemsSource="{Binding TableNavigationItems}"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Center">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource NavRailButton}"
+                                    Margin="0,4"
+                                    ToolTip="{Binding Title}"
+                                    Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                    CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DockPanel>
         </Border>
 
         <!-- Main Column Content Grid -->
